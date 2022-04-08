@@ -1,0 +1,23 @@
+export const WHALES = {
+    ETH: '0x19184ab45c40c2920b0e0e31413b9434abd243ed',
+    DOUGH: '0x90ae1ba6e3d33775b97273902a06560aa6ac4c96',
+    DEFI_L: '0x450c0c90706a8cc664e8b496711370b43415715d'
+};
+
+
+export const CONTRACTS = {
+    PIES: {
+        DEFI_PP: '0x8d1ce361eb68e9e05573443c407d4a3bed23b033',
+        DEFI_L: '0x706f00ea85a71eb5d7c2ce2ad61dbbe62b616435',
+        DEFI_S: '',
+    }
+};
+
+export const TOKENS = {
+    DOUGH: '0xad32A8e6220741182940c5aBF610bDE99E737b2D',
+    PIES: CONTRACTS.PIES
+};
+
+export const MULTISIGS = {
+    OPS: '0x6458A23B020f489651f2777Bd849ddEd34DfCcd2'
+};
