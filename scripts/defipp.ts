@@ -26,7 +26,7 @@ async function enablePool() {
         params: [MULTISIGS.OPS],
     });
     const multisig = await hre.ethers.getSigner(MULTISIGS.OPS)
-    const defiPp = new hre.ethers.Contract(CONTRACTS.PIES.DEFI_L, DEFI_PP, multisig) as DefiPp;
+    const defiPp = new hre.ethers.Contract(CONTRACTS.PIES.DEFI_PP, DEFI_PP, multisig) as DefiPp;
     await isExitEnabled(defiPp);
     await defiPp.setJoinExitEnabled(true)
     await isExitEnabled(defiPp);
@@ -44,8 +44,18 @@ async function approveDefiLSwap(quantity: BigNumber) {
 
 async function executeSwap(quantity: BigNumber) {
     const whale = await getWhale();
+
     const defiPp = new hre.ethers.Contract(CONTRACTS.PIES.DEFI_PP, DEFI_PP, whale) as DefiPp;
+
+    const defiL = new hre.ethers.Contract(CONTRACTS.PIES.DEFI_L, DEFI_PP, whale) as DefiPp;
+
+    let balance = await defiL.balanceOf(whale.address);
+    console.log({ balance })
+
     await defiPp.joinswapExternAmountIn(TOKENS.PIES.DEFI_L, quantity, 100)
+
+    balance = await defiL.balanceOf(whale.address);
+    console.log({ balance })
 };
 
 const quantity = hre.ethers.utils.parseEther(String(10_000));

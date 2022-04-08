@@ -7,9 +7,9 @@ export const WHALES = {
 
 export const CONTRACTS = {
     PIES: {
-        DEFI_PP: '0x8d1ce361eb68e9e05573443c407d4a3bed23b033',
-        DEFI_L: '0x706f00ea85a71eb5d7c2ce2ad61dbbe62b616435',
-        DEFI_S: '',
+        DEFI_PP: '0x8D1ce361eb68e9E05573443C407D4A3Bed23B033',
+        DEFI_L: '0x78f225869c08d478c34e5f645d07a87d3fe8eb78',
+        DEFI_S: '0xad6a626ae2b43dcb1b39430ce496d2fa0365ba9c',
     }
 };
 
