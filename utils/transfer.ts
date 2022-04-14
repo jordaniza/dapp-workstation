@@ -5,6 +5,7 @@ import "@nomiclabs/hardhat-waffle";
 import ERC20 from '../abi/erc20.json'
 import { Token } from "../typechain/Token";
 import * as hre from 'hardhat'
+import { impersonate } from './impersonate'
 
 export const transfer = async (params: {
     token: null | string // null is eth,
@@ -12,11 +13,7 @@ export const transfer = async (params: {
     receiver: string,
     quantity: number
 }) => {
-
-    // await hre.network.provider.request({
-    //     method: "hardhat_impersonateAccount",
-    //     params: [params.whale],
-    // });
+    await impersonate(params.whale);
 
     const whale = await hre.ethers.getSigner(params.whale);
     const testAccount = await hre.ethers.getSigner(params.receiver)

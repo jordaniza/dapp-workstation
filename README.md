@@ -1,10 +1,16 @@
 # PieDAO development Environment
 
 This is a sample development environment for PieDAO allowing you to spin up a local fork and connect via RPC.
+## Motivation
 
+We already have Development environments. Brownie, Hardhat, Truffle etc. etc. These tools are excellent and this environment does not aim to replicate them.
+
+Instead it is a collection of template files, scripts for common operations, documentation for common pitfalls, and worked examples. The aim is very simple: getting your DApp environment working quickly will save you a TON of development time, and even the learning curve of something as user friendly as, say, hardhat, is time you could spend building cool Web3 apps.
+
+Essentially, this is aiming to get you started, addressing the sharp corners in running forked nodes, and providing you with a swiss-army knife of tools that you can add to as you need.
 ## Starting the network
 
-Open a terminal and start an RPC Server on `http://localhost:8545`
+Open a terminal and start an RPC Server on `http://localhost:8545`, this will also unlock all the accounts in the `WHALES` variable in `utils/addresses.ts`.
 
 ```bash
 yarn fork:mainnet
@@ -39,7 +45,7 @@ npx hardhat --network localhost run scripts/transferDough.ts
 yarn types
 ```
 
-We can generate types using `npx hardhat typechain`, but this is generally used for contracts 
+We can also generate types using `npx hardhat typechain`, but this is generally used for contracts.
 
 ## Metamask
 
@@ -50,13 +56,18 @@ Forked networks in particular seem to have a lot of challenges with metamask on 
 * Ganache is by far the most stable, but has comptability issues with some versions of metamask
 * Tenderly forks work fine, but have rate limits and limited functionality for scripting
 
-As of time of writing, a stable option is to install the 10.7.1 version of metamask connected to an RPC server on ganache-cli
+Different versions of Metamask have different stability. It is possible for transactions to get stuck indefinitely, although this seems intermittent. If in doubt, try restarting the RPC, resetting the nonce on metamask & reopening the browser.
+
+The Metamask Flask is a useful canary version that can be used as an alternative to the current metamask if you are having difficulties. You can also try installing older versions.
 
 ## Gotchas:
 
-
 ### Impersonate Accounts before transfering
 
+Before executing transactions on behalf of other accounts, you need to enable such accounts on the network:
+
+
+**On Hardhat**
 Before making a signed request on behalf of another account, ensure you call the special method "hardhat_impersonateAccount":
 
 ```ts
@@ -66,6 +77,14 @@ await hre.network.provider.request({
 });
 
 ```
+
+**On Ganache**
+Ganache requires the account be added as a parameter in the `--unlock` flag when starting the node. Note that this means the node needs to be restarted if you need to add another account.
+
+In the `utils/addresses.ts` file, there is a list of `WHALES`: accounts on a given blockchain that have large numbers of a particular token. If you add an account to this, it will automatically get picked up by the `yarn fork:{chain}` script.
+
+**Helper Utils**
+Call the `impersonate(account: string)` method when writing scripts. This can be found in the `utils/` folder. This will check if the network is hardhat or not before calling the impersonate method. Useful to avoid having to rewrite scripts between unit testing and forking. 
 ### Scripts need to be invoked
 
 Add this boilerplate so your async scripts actually run when you invoke them:

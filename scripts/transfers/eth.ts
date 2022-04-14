@@ -1,6 +1,6 @@
 
-import { WHALES } from "../utils/addresses";
-import { transfer } from "../utils/transfer";
+import { WHALES } from "../../utils/addresses";
+import { transfer } from "../../utils/transfer";
 
 export const transferEth = async () => {
     await transfer({

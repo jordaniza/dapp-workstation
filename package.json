@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "types": "yarn typechain --target ethers-v5 --out-dir abi/types abi/*.json ",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "fork:mainnet": "yarn ganache-cli --fork https://rpc.ankr.com/eth --chain.chainId 1 --unlock 0x19184ab45c40c2920b0e0e31413b9434abd243ed 0x90ae1ba6e3d33775b97273902a06560aa6ac4c96 0x63BCe354DBA7d6270Cb34dAA46B869892AbB3A79"
+    "fork:mainnet": "ganache-cli --fork https://rpc.ankr.com/eth --chain.chainId 1 --unlock $(ts-node ./utils/getUnlockAccounts.ts)",
+    "run:hardhat": "npx hardhat run --network hardhat",
+    "run:fork": "npx hardhat run --network localhost"
   },
   "author": "jordaniza",
   "license": "MIT",
