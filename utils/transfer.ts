@@ -3,9 +3,10 @@
 import "@nomiclabs/hardhat-waffle";
 
 import ERC20 from '../abi/erc20.json'
-import { Token } from "../typechain/Token";
 import * as hre from 'hardhat'
 import { impersonate } from './impersonate'
+import { BigNumber } from "ethers";
+import { Standard_Token } from "../typechain";
 
 export const transfer = async (params: {
     token: null | string // null is eth,
@@ -13,17 +14,17 @@ export const transfer = async (params: {
     receiver: string,
     quantity: number
 }) => {
+    let [whaleBalancePost, accountBalancePost] = [] as BigNumber[];
+
     await impersonate(params.whale);
 
     const whale = await hre.ethers.getSigner(params.whale);
     const testAccount = await hre.ethers.getSigner(params.receiver)
 
-    let [whaleBalance, taBalance] = await Promise.all([
+    let [whaleBalancePre, accountBalancePre] = await Promise.all([
         whale.getBalance(),
         testAccount.getBalance()
     ]);
-
-    console.log({ whaleBalance, taBalance });
 
     if (!params.token) {
         await whale.sendTransaction({
@@ -34,27 +35,36 @@ export const transfer = async (params: {
 
         );
 
-        [whaleBalance, taBalance] = await Promise.all([
+        [whaleBalancePost, accountBalancePost] = await Promise.all([
             whale.getBalance(),
             testAccount.getBalance()
         ]);
 
     } else {
-        const token = new hre.ethers.Contract(params.token, ERC20, whale) as Token;
+        const token = new hre.ethers.Contract(params.token, ERC20, whale) as Standard_Token;
+
+        const decimals = await token.decimals();
+
+        [whaleBalancePre, accountBalancePre] = await Promise.all([
+            token.balanceOf(params.whale),
+            token.balanceOf(params.receiver)
+        ]);
 
         await token.transfer(
             params.receiver,
-            hre.ethers.utils.parseEther(params.quantity.toString()),
+            hre.ethers.utils.parseUnits(params.quantity.toString(), decimals),
             {
-                from: whale.address,
                 maxFeePerGas: 92198409185
             }
         );
 
-        [whaleBalance, taBalance] = await Promise.all([
+        [whaleBalancePost, accountBalancePost] = await Promise.all([
             token.balanceOf(params.whale),
             token.balanceOf(params.receiver)
         ]);
     }
-    console.log({ whaleBalance, taBalance })
+    console.table([
+        { when: 'pre', whale: whaleBalancePre, account: accountBalancePre },
+        { when: 'post', whale: whaleBalancePost, account: accountBalancePost }
+    ]);
 }

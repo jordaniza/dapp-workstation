@@ -10,7 +10,7 @@ export const transferDough = async () => {
     await transfer({
         token: TOKENS.DOUGH,
         whale: WHALES.DOUGH,
-        receiver: process.env.TEST_ACCOUNT ?? '0x63BCe354DBA7d6270Cb34dAA46B869892AbB3A79',
+        receiver: TEST_ACCOUNTS.FAKE_NEWS,
         quantity: 10_000
     })
 };
@@ -24,7 +24,7 @@ export const approveDoughStaking = async () => {
     });
 }
 
-approveDoughStaking()
+transferDough()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

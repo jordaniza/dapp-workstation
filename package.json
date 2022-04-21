@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "types": "yarn typechain --target ethers-v5 --out-dir abi/types abi/*.json ",
-    "fork:mainnet": "ganache-cli --fork https://rpc.ankr.com/eth --chain.chainId 1 --unlock $(ts-node ./utils/getUnlockAccounts.ts)",
+    "fork:mainnet": "ganache-cli --fork https://rpc.ankr.com/eth --blockTime 3 --chain.chainId 1 --unlock $(ts-node ./utils/getUnlockAccounts.ts)",
     "run:hardhat": "npx hardhat run --network hardhat",
-    "run:fork": "npx hardhat run --network localhost"
+    "run:fork": "npx hardhat run --network localhost",
+    "transfer": "scripts/transfers/transfer.sh"
   },
   "author": "jordaniza",
   "license": "MIT",

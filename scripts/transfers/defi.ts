@@ -20,9 +20,20 @@ export const transferDefipl = async () => {
     });
 }
 
+
+export const transferDefipp = async () => {
+    await transfer({
+        token: TOKENS.PIES.DEFI_PP,
+        whale: WHALES.DEFI_PP,
+        receiver: TEST_ACCOUNTS.FAKE_NEWS,
+        quantity: 100
+    });
+}
+
 const main = async () => {
     await transferDefips();
     await transferDefipl();
+    await transferDefipp();
 }
 
 main()

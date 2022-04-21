@@ -17,7 +17,7 @@ const isExitEnabled = async (defiPp: DefiPp) => {
 
 type Pie = keyof typeof TOKENS['PIES'];
 
-const PIE: Pie = 'DEFI_L'
+const PIE: Pie = 'DEFI_S'
 
 
 /**
@@ -109,13 +109,13 @@ export const transferEth = async () => {
 };
 
 const main = async () => {
-    await transferEth();
-    await transfer({
-        token: TOKENS.PIES[PIE],
-        whale: WHALES[PIE],
-        receiver: TEST_ACCOUNTS.FAKE_NEWS,
-        quantity: 100
-    });
+    // await transferEth();
+    // await transfer({
+    //     token: TOKENS.PIES[PIE],
+    //     whale: WHALES[PIE],
+    //     receiver: TEST_ACCOUNTS.FAKE_NEWS,
+    //     quantity: 100
+    // });
 
     console.log('transfers complete')
     const quantity = hre.ethers.utils.parseEther(String(100))
@@ -124,10 +124,10 @@ const main = async () => {
     await approveSwap();
     console.log('Swap Approved');
 
-    const quote = await getQuote(quantity);
+    // const quote = await getQuote(quantity);
 
-    await executeSwap(quantity, quote);
-    console.log('Swap Completed');
+    // await executeSwap(quantity, quote);
+    // console.log('Swap Completed');
 };
 
 main().then(() => process.exit(0))
