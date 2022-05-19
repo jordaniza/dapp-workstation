@@ -1,3 +1,5 @@
+// Change the account in .env to your account or change it here
+const MY_ACCOUNT = process.env.TEST_ACCOUNT ?? '0x63BCe354DBA7d6270Cb34dAA46B869892AbB3A79'
 
 /**
  * Accounts with relatively large amounts of tokens.
@@ -18,7 +20,7 @@ export const WHALES = {
 };
 
 export const TEST_ACCOUNTS = {
-    FAKE_NEWS: '0x63BCe354DBA7d6270Cb34dAA46B869892AbB3A79'
+    FAKE_NEWS: MY_ACCOUNT
 };
 
 export const CONTRACTS = {
