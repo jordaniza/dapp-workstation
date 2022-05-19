@@ -30,14 +30,28 @@ import * as hre from 'hardhat'
 When running a script, you can test it works without messing with the fork by running:
 
 ```sh
-npx hardhat --network hardhat run scripts/myScript.ts
+yarn run:hardhat /path/to/script.ts
 ```
 
-If you actually want changes to be applied to the fork, use:
+If you actually want changes to be applied to the fork, open a second terminal while the fork is running, and use:
 
 ```sh
-npx hardhat --network localhost run scripts/transferDough.ts
+yarn run:fork /path/to/script.ts
 ```
+
+A common use case is to transfer tokens to your account for testing different states. You can do this by:
+
+1. Creating a new script in `scripts/transfers` with the name of the file as the token you want to transfer.
+2. Ensure that you add the contract of the token, and an associated 'Whale' from whom you can transfer the tokens.
+3. Ensure your account is added to the test accounts.
+4. Run the following
+```sh
+yarn transfer [tokens] 
+```
+Example, to transfer WBTC, SLICE and ETH:
+```
+yarn transfer wbtc slice eth
+``` 
 
 ## Generate Typings
 

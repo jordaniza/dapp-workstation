@@ -13,7 +13,8 @@ export const WHALES = {
     DEFI_L: '0x450c0c90706a8cc664e8b496711370b43415715d',
     DEFI_S: '0xc69880ea5086c89972cf1bb08b9bb6ad2bdc9df9',
     SLICE: '0x4281579d99d855f2430c95a13720e53a0fcc0549',
-    BCP: '0x7091de9a5435dba7f051045d64c5ef56bd96064e'
+    BCP: '0x7091de9a5435dba7f051045d64c5ef56bd96064e',
+    JCR: '0xdebf00c3a56eda60364c7f7f38b80f28e2d8ba5e',
 };
 
 export const TEST_ACCOUNTS = {
@@ -35,6 +36,7 @@ export const TOKENS = {
     SLICE: '0x1083d743a1e53805a95249fef7310d75029f7cd6',
     WETH: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
     WBTC: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
+    JCR: '0x84f20bf5bb4be345d3ab37c565f732753435dbe3',
     PIES: CONTRACTS.PIES,
 };
 

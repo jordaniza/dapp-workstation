@@ -5,7 +5,7 @@ import "@nomiclabs/hardhat-waffle";
 import ERC20 from '../abi/erc20.json'
 import * as hre from 'hardhat'
 import { impersonate } from './impersonate'
-import { BigNumber } from "ethers";
+import { BigNumberish } from "ethers";
 import { Standard_Token } from "../typechain";
 
 export const transfer = async (params: {
@@ -14,7 +14,7 @@ export const transfer = async (params: {
     receiver: string,
     quantity: number
 }) => {
-    let [whaleBalancePost, accountBalancePost] = [] as BigNumber[];
+    let [whaleBalancePost, accountBalancePost, decimals] = [] as BigNumberish[];
 
     await impersonate(params.whale);
 
@@ -31,23 +31,18 @@ export const transfer = async (params: {
             to: testAccount.address,
             value: hre.ethers.utils.parseEther(params.quantity.toString()),
             maxFeePerGas: 92198409185,
-        }
+        });
 
-        );
-
-        [whaleBalancePost, accountBalancePost] = await Promise.all([
-            whale.getBalance(),
-            testAccount.getBalance()
-        ]);
+        whaleBalancePost = await whale.getBalance();
+        accountBalancePost = await testAccount.getBalance();
 
     } else {
         const token = new hre.ethers.Contract(params.token, ERC20, whale) as Standard_Token;
 
-        const decimals = await token.decimals();
-
-        [whaleBalancePre, accountBalancePre] = await Promise.all([
+        [whaleBalancePre, accountBalancePre, decimals] = await Promise.all([
             token.balanceOf(params.whale),
-            token.balanceOf(params.receiver)
+            token.balanceOf(params.receiver),
+            token.decimals()
         ]);
 
         await token.transfer(
@@ -58,11 +53,10 @@ export const transfer = async (params: {
             }
         );
 
-        [whaleBalancePost, accountBalancePost] = await Promise.all([
-            token.balanceOf(params.whale),
-            token.balanceOf(params.receiver)
-        ]);
+        whaleBalancePost = await token.balanceOf(params.whale)
+        accountBalancePost = await token.balanceOf(params.receiver)
     }
+
     console.table([
         { when: 'pre', whale: whaleBalancePre, account: accountBalancePre },
         { when: 'post', whale: whaleBalancePost, account: accountBalancePost }
