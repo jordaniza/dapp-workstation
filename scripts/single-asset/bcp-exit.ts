@@ -105,10 +105,6 @@ async function executeSwap(quantity: BigNumber, quote: BigNumber, entry = true) 
 
     await printBalances(address, [tokenContract, bcp]);
 
-    const x = await bcp.getTokens();
-
-    console.log('getTokens: ', x, { quantity, quote, len: quantity.toString().length, token });
-
     entry
         ? await bcp.joinswapExternAmountIn(TOKENS.PIES[PIE], quantity, slippageValue(quote))
         : await bcp.exitswapPoolAmountIn(token, quantity, 0);
