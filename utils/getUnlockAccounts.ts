@@ -1,6 +1,6 @@
-import { WHALES, TEST_ACCOUNTS } from './addresses';
+import { WHALES, TEST_ACCOUNTS, GOVERNANCE } from './addresses';
 
-const inputs = [...Object.values(WHALES), ...Object.values(TEST_ACCOUNTS)]
+const inputs = [...Object.values(WHALES), ...Object.values(TEST_ACCOUNTS), ...Object.values(GOVERNANCE)]
 
 // convert accounts to space separated list for ganache scripts
 const output = inputs.reduce((prev, curr) => {
