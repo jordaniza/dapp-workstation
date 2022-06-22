@@ -25,8 +25,13 @@ const config: HardhatUserConfig = {
         url: 'https://rpc.ankr.com/eth',
       },
       chainId: 1,
+    },
+    ftmTest: {
+      url: "https://rpc.testnet.fantom.network"
+    },
+    fuji: {
+      url: "https://api.avax-test.network/ext/C/rpc"
     }
-
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
