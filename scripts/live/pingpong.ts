@@ -13,9 +13,13 @@ const FTM_TESTNET = {
     lZeroChainId: 10012,
 }
 
+const pk = process.env.PRIVATE_KEY;
+if (!pk) throw new Error('Missing Private Key');
+
 async function ftmTest() {
+
     const provider = new ethers.providers.JsonRpcProvider('https://rpc.testnet.fantom.network');
-    const wallet = new ethers.Wallet('75ab1459912c33e7000673df77570b7693c1a033138f38167543d2dbe41f34ea', provider);
+    const wallet = new ethers.Wallet(pk!, provider);
     const pingPong = new ethers.Contract(CONTRACTS.PINGPONG.FTM_TESTNET, pingpongabi, wallet) as Pingpong;
     // set some eth
     // await wallet.sendTransaction({
@@ -35,7 +39,7 @@ async function ftmTest() {
 
 async function fuji() {
     const provider = new ethers.providers.JsonRpcProvider("https://api.avax-test.network/ext/C/rpc");
-    const wallet = new ethers.Wallet('75ab1459912c33e7000673df77570b7693c1a033138f38167543d2dbe41f34ea', provider);
+    const wallet = new ethers.Wallet(pk!, provider);
     const pingPong = new ethers.Contract(CONTRACTS.PINGPONG.AVAX_FUJI, pingpongabi, wallet) as Pingpong;
     // set some eth
     // await wallet.sendTransaction({
