@@ -8,7 +8,8 @@
     "fork:mainnet": "ganache-cli --fork https://rpc.ankr.com/eth --blockTime 3 --chain.chainId 1 --unlock $(ts-node ./utils/getUnlockAccounts.ts)",
     "run:hardhat": "npx hardhat run --network hardhat",
     "run:fork": "npx hardhat run --network localhost",
-    "transfer": "scripts/transfers/transfer.sh"
+    "transfer": "scripts/transfers/transfer.sh",
+    "init:investify": "yarn run:hardhat scripts/investify/init.ts"
   },
   "author": "jordaniza",
   "license": "MIT",
