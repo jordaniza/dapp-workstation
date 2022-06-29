@@ -27,11 +27,13 @@ export const transfer = async (params: {
     ]);
 
     if (!params.token) {
-        await whale.sendTransaction({
+        // transfer ETH
+        const tx = await whale.sendTransaction({
             to: testAccount.address,
             value: hre.ethers.utils.parseEther(params.quantity.toString()),
             maxFeePerGas: 92198409185,
         });
+        await tx.wait();
 
         whaleBalancePost = await whale.getBalance();
         accountBalancePost = await testAccount.getBalance();
@@ -45,13 +47,14 @@ export const transfer = async (params: {
             token.decimals()
         ]);
 
-        await token.transfer(
+        const tx = await token.transfer(
             params.receiver,
             hre.ethers.utils.parseUnits(params.quantity.toString(), decimals),
             {
                 maxFeePerGas: 92198409185
             }
         );
+        await tx.wait();
 
         whaleBalancePost = await token.balanceOf(params.whale)
         accountBalancePost = await token.balanceOf(params.receiver)
