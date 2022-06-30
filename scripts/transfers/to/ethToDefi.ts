@@ -1,17 +1,17 @@
 
-import { TEST_ACCOUNTS, WHALES } from "../../utils/addresses";
-import { transfer } from "../../utils/transfer";
+import { WHALES } from "../../../utils/addresses";
+import { transfer } from "../../../utils/transfer";
 
 export const transferEth = async () => {
     await transfer({
         token: null,
         whale: WHALES.ETH,
-        receiver: TEST_ACCOUNTS.FAKE_NEWS,
+        receiver: WHALES.DEFI_PP,
         quantity: 10
     })
 };
 
-if (require.main === module) transferEth()
+transferEth()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

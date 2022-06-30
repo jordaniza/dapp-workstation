@@ -31,12 +31,12 @@ export const transferDefipp = async () => {
 }
 
 const main = async () => {
-    await transferDefips();
-    await transferDefipl();
+    // await transferDefips();
+    // await transferDefipl();
     await transferDefipp();
 }
 
-main()
+if (require.main === module) main()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

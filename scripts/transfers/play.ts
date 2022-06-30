@@ -1,16 +1,16 @@
 import { TEST_ACCOUNTS, TOKENS, WHALES } from "../../utils/addresses"
 import { transfer } from "../../utils/transfer"
 
-export const transferWeth = async (): Promise<void> => {
+export const transferPlay = async (): Promise<void> => {
     await transfer({
-        token: TOKENS.WETH,
-        whale: WHALES.WETH,
+        token: TOKENS.PIES.PLAY,
+        whale: WHALES.PLAY,
         receiver: TEST_ACCOUNTS.FAKE_NEWS,
-        quantity: 10
+        quantity: 1_000
     })
 };
 
-if (require.main === module) transferWeth()
+if (require.main === module) transferPlay()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);
