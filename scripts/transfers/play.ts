@@ -1,7 +1,7 @@
 import { TEST_ACCOUNTS, TOKENS, WHALES } from "../../utils/addresses"
 import { transfer } from "../../utils/transfer"
 
-const transferPlay = async (): Promise<void> => {
+export const transferPlay = async (): Promise<void> => {
     await transfer({
         token: TOKENS.PIES.PLAY,
         whale: WHALES.PLAY,
@@ -10,7 +10,7 @@ const transferPlay = async (): Promise<void> => {
     })
 };
 
-transferPlay()
+if (require.main === module) transferPlay()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

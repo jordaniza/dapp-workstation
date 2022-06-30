@@ -11,8 +11,7 @@
     "run:fork": "npx hardhat run --network localhost",
     "run:fork:ftm": "npx hardhat run --network ftm_fork",
     "transfer": "scripts/transfers/transfer.sh",
-    "init:investify": "yarn run:hardhat scripts/investify/init.ts",
-    "proof": "scripts/MerkleProofs/generateProof.sh"
+    "init:investify": "yarn run:hardhat scripts/investify/init.ts"
   },
   "author": "jordaniza",
   "license": "MIT",

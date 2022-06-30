@@ -1,4 +1,8 @@
-import { executeBashScript } from '../../utils/executeBash'
+import { transferBCP } from '../transfers/bcp';
+import { transferDefipp } from '../transfers/defi';
+import { transferEth } from '../transfers/eth';
+import { transferPlay } from '../transfers/play';
+import { depositIntoAuxo } from './auxo';
 
 /**
  * An init script for e2e testing with synpress and investify 
@@ -6,15 +10,15 @@ import { executeBashScript } from '../../utils/executeBash'
 
 async function main() {
     console.log('------- Beginning transfers -------');
-    await executeBashScript('yarn transfer eth defi play bcp');
+    await transferEth();
+    await transferPlay();
+    await transferDefipp();
+    await transferBCP();
     console.log('------- Setting up Auxo Vaults -------');
-    await setupAuxo();
+    // await depositIntoAuxo();
     console.log('------- Setup Complete -------');
 }
 
-async function setupAuxo() {
-    // sets up an auxo vault deposit
-}
 
 main().then(() => process.exit(0))
  .catch((error: unknown) => {

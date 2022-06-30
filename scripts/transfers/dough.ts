@@ -24,7 +24,7 @@ export const approveDoughStaking = async () => {
     });
 }
 
-transferDough()
+if (require.main === module) transferDough()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

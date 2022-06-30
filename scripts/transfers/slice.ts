@@ -11,7 +11,7 @@ export const transferSlice = async () => {
     })
 };
 
-transferSlice()
+if (require.main === module) transferSlice()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

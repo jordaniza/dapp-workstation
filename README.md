@@ -10,11 +10,14 @@ Instead it is a collection of template files, scripts for common operations, doc
 Essentially, this is aiming to get you started, addressing the sharp corners in running forked nodes, and providing you with a swiss-army knife of tools that you can add to as you need.
 ## Starting the network
 
-Open a terminal and start an RPC Server on `http://localhost:8545`, this will also unlock all the accounts in the `WHALES` variable in `utils/addresses.ts`.
+Open a terminal and start an RPC Server on `http://localhost:{PORT}`, this will also unlock all the accounts in the `WHALES` variable in `utils/addresses.ts`.
 
 ```bash
-yarn fork:mainnet
+yarn fork:{NETWORK}
 ```
+Available options for NETWORK are `mainnet` (port 8545) and `ftm` (port 8546)
+
+
 See the [metamask](#metamask) section below for the issues with metamask, and why we are using the ganache-cli to run the local RPC node.
 
 ## Running scripts
@@ -36,7 +39,19 @@ yarn run:hardhat /path/to/script.ts
 If you actually want changes to be applied to the fork, open a second terminal while the fork is running, and use:
 
 ```sh
-yarn run:fork /path/to/script.ts
+yarn run:fork[:NETWORK] /path/to/script.ts
+```
+
+The script defaults to mainnet, you can run on different forks by adding the NETWORK variable, for example:
+
+```
+sh
+
+# run on mainnet
+yarn run:fork /script
+
+# run on fantom fork
+yarn run:fork:ftm /script
 ```
 
 A common use case is to transfer tokens to your account for testing different states. You can do this by:
@@ -46,12 +61,19 @@ A common use case is to transfer tokens to your account for testing different st
 3. Ensure your account is added to the test accounts.
 4. Run the following
 ```sh
-yarn transfer [tokens] 
+yarn transfer [network] [tokens] 
 ```
-Example, to transfer WBTC, SLICE and ETH:
+Example, to transfer WBTC, SLICE and ETH on mainnet:
 ```
-yarn transfer wbtc slice eth
+yarn transfer mainnet wbtc slice eth
 ``` 
+
+Alternatively, you can transfer on FTM:
+
+```
+yarn transfer fantom ftm_usdc ftm
+```
+You'll notice that each erc20 needs to be setup for each chain, we will look to improve that in the future.
 
 ## Generate Typings
 

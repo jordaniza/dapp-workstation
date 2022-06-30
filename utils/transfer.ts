@@ -14,6 +14,8 @@ export const transfer = async (params: {
     receiver: string,
     quantity: number
 }) => {
+    console.log(`Token Address ${params.token ?? 'Native'}`);
+
     let [whaleBalancePost, accountBalancePost, decimals] = [] as BigNumberish[];
 
     await impersonate(params.whale);

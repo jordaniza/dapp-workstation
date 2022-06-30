@@ -1,7 +1,5 @@
 import { WHALES, TEST_ACCOUNTS, GOVERNANCE } from './addresses';
 
-// console.log('THE TEST ACCOUNT IS', process.env.TEST_ACCOUNT)
-
 const inputs = [...Object.values(TEST_ACCOUNTS), ...Object.values(WHALES), ...Object.values(GOVERNANCE)]
 
 // convert accounts to space separated list for ganache scripts

@@ -11,7 +11,7 @@ const transferlooks = async (): Promise<void> => {
     })
 };
 
-transferlooks()
+if (require.main === module) transferlooks()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

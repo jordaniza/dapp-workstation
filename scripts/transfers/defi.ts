@@ -36,7 +36,7 @@ const main = async () => {
     await transferDefipp();
 }
 
-main()
+if (require.main === module) main()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

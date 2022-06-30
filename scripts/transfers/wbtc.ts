@@ -1,7 +1,7 @@
 import { TEST_ACCOUNTS, TOKENS, WHALES } from "../../utils/addresses"
 import { transfer } from "../../utils/transfer"
 
-const transferWbtc = async (): Promise<void> => {
+export const transferWbtc = async (): Promise<void> => {
     await transfer({
         token: TOKENS.WBTC,
         whale: WHALES.WBTC,
@@ -10,7 +10,7 @@ const transferWbtc = async (): Promise<void> => {
     })
 };
 
-transferWbtc()
+if (require.main === module) transferWbtc()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

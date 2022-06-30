@@ -19,7 +19,7 @@ const transferBDI = async (): Promise<void> => {
     })
 };
 
-transferBDI()
+if (require.main === module) transferBDI()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

@@ -12,7 +12,7 @@ export const transferFtm = async () => {
     })
 };
 
-transferFtm()
+if (require.main === module) transferFtm()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);

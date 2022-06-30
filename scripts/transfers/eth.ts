@@ -11,7 +11,7 @@ export const transferEth = async () => {
     })
 };
 
-transferEth()
+if (require.main === module) transferEth()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);
