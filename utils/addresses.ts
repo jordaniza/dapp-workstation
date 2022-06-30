@@ -2,7 +2,8 @@ import BASKETDAO_MIGRATE from '../abi/basketdao.json';
 import ERC_20 from '../abi/erc20.json';
 
 // Change the account in .env to your account or change it here
-const MY_ACCOUNT = process.env.TEST_ACCOUNT ?? '0x63BCe354DBA7d6270Cb34dAA46B869892AbB3A79'
+// const MY_ACCOUNT = '0x72D37081E51f6AF28F3c38108397ca20cDca03Bb' 
+const MY_ACCOUNT = process.env.TEST_ACCOUNT ?? '0x72D37081E51f6AF28F3c38108397ca20cDca03Bb'
 
 /**
  * Accounts with relatively large amounts of tokens.
@@ -21,7 +22,9 @@ export const WHALES = {
     BCP: '0x7091de9a5435dba7f051045d64c5ef56bd96064e',
     BDI: '0x5d33d8322ec6e9a789200cc144245a13015e5172',
     LOOKS: '0x6cc5f688a315f3dc28a7781717a9a798a59fda7b',
-    PLAY: '0xa30c7b2e676be6b0c26d631c8161b62ebebc3cd2'
+    PLAY: '0xa30c7b2e676be6b0c26d631c8161b62ebebc3cd2',
+    FTM_USDC: '0x5d13f4bf21db713e17e04d711e0bf7eaf18540d6',
+    FTM: '0x19dd92c9a9c4eb6f0426846c4f8a071a7b79209a'
 };
 
 export const TEST_ACCOUNTS = {
@@ -36,6 +39,13 @@ export const CONTRACTS = {
         BCP: '0xe4f726adc8e89c6a6017f01eada77865db22da14',
         PLAY: '0x33e18a092a93ff21ad04746c7da12e35d34dc7c4'
     },
+    VAULTS: {
+        FTM: {
+            AUXO_USDC: '0x662556422AD3493fCAAc47767E8212f8C4E24513',
+            AUTH: '0xa86fc7ad871b5247f13bb38a08a67be4d38e577b',
+        },
+    },
+    
     STAKING: '0x6Bd0D8c8aD8D3F1f97810d5Cc57E9296db73DC45',
     BASKETDAO_MIGRATE: '0x7940c0225c836742e8953f69e0af0c4b371a35bf',
     PINGPONG: {
@@ -74,12 +84,17 @@ export const TOKENS = {
     BDI: '0x0309c98b1bffa350bcb3f9fb9780970ca32a5060',
     PIES: CONTRACTS.PIES,
     LOOKS: '0xf4d2888d29d722226fafa5d9b24f9164c092421e',
+    FTM_USDC: '0x04068da6c83afcfa0e13ba15a6696662335d5b75',
+    FTM: '0x57900b3dc6206994d3b2d593db8f6c6bfdbb61a9'
 };
 
 export const MULTISIGS = {
-    OPS: '0x6458A23B020f489651f2777Bd849ddEd34DfCcd2'
+    OPS: '0x6458A23B020f489651f2777Bd849ddEd34DfCcd2',
+    AUXO_FTM_ADMIN: '0x309dcdbe77d9d73805e96662503b08fee229597a'
 };
 
 export const GOVERNANCE = {
-    BASKETDAO_MIGRATE: '0x6458A23B020f489651f2777Bd849ddEd34DfCcd2'
+    BASKETDAO_MIGRATE: '0x6458A23B020f489651f2777Bd849ddEd34DfCcd2',
+    // gnosis
+    AUXO_FTM_ADMIN: MULTISIGS.AUXO_FTM_ADMIN
 }

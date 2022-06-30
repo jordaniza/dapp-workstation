@@ -26,6 +26,10 @@ const config: HardhatUserConfig = {
       },
       chainId: 1,
     },
+    ftm_fork: {
+      url: "http://127.0.0.1:8546",
+      chainId: 250
+    },
     ftmTest: {
       url: "https://rpc.testnet.fantom.network"
     },

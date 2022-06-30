@@ -7,6 +7,7 @@ import { network, ethers } from 'hardhat'
  * @param who the address of the user to impersonate
  */
 export const impersonate = async (who: string): Promise<SignerWithAddress> => {
+    console.debug(`Impersonating ${who}`)
     if (network.name === 'hardhat') {
         await network.provider.request({
             method: "hardhat_impersonateAccount",

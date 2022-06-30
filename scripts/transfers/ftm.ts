@@ -1,17 +1,18 @@
 
-import { TEST_ACCOUNTS, WHALES } from "../../utils/addresses";
+import { TEST_ACCOUNTS, TOKENS, WHALES } from "../../utils/addresses";
 import { transfer } from "../../utils/transfer";
 
-export const transferEth = async () => {
+export const transferFtm = async () => {
+    console.warn('CURRENTLY SETUP FOR FTM');
     await transfer({
-        token: null,
-        whale: WHALES.ETH,
+        token: TOKENS.FTM,
+        whale: WHALES.FTM,
         receiver: TEST_ACCOUNTS.FAKE_NEWS,
-        quantity: 10
+        quantity: 1000
     })
 };
 
-transferEth()
+transferFtm()
     .then(() => process.exit(0))
     .catch((error: unknown) => {
         console.error(error);
