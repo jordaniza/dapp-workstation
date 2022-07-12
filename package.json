@@ -10,8 +10,7 @@
     "run:hardhat": "npx hardhat run --network hardhat",
     "run:fork": "npx hardhat run --network localhost",
     "run:fork:ftm": "npx hardhat run --network ftm_fork",
-    "transfer": "scripts/transfers/transfer.sh",
-    "init:investify": "yarn run:hardhat scripts/investify/init.ts"
+    "transfer": "scripts/transfers/transfer.sh"
   },
   "author": "jordaniza",
   "license": "MIT",

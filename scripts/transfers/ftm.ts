@@ -5,10 +5,10 @@ import { transfer } from "../../utils/transfer";
 export const transferFtm = async () => {
     console.warn('CURRENTLY SETUP FOR FTM');
     await transfer({
-        token: TOKENS.FTM,
+        token: null,
         whale: WHALES.FTM,
         receiver: TEST_ACCOUNTS.FAKE_NEWS,
-        quantity: 1000
+        quantity: 100
     })
 };
 

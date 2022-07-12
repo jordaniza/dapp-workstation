@@ -47,8 +47,10 @@ const getRpcAndTestToken = (): { rpc: string, tokenAddress: string } => {
             break;
         }
     }
+    const rpc = `http://localhost:${port}`;
+    console.log(`RPC: ${rpc}`);
     return {
-        rpc: `http://localhost:${port}`,
+        rpc,
         tokenAddress: address
     }
 }

@@ -1,5 +1,4 @@
 import { ethers } from 'hardhat';
-import { Auxo__factory } from '../../abi/types/factories/Auxo__factory';
 import { VaultAuth__factory } from '../../abi/types/factories/VaultAuth__factory';
 import { Erc20__factory } from '../../abi/types/factories/Erc20__factory';
 import { CONTRACTS, TEST_ACCOUNTS, TOKENS, WHALES } from '../../utils/addresses';
@@ -7,7 +6,9 @@ import { getAccountWithFallback, impersonate } from '../../utils/impersonate';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import dotenv from 'dotenv';
 import { Wallet } from 'ethers';
+import { getAuxoContracts } from '../../utils/getAuxoContracts';
 import { merkleTreeAndRoot } from '../../utils/generateMerkleTree';
+
 import { Auxo, VaultAuth } from '../../abi/types';
 
 dotenv.config();
@@ -58,28 +59,8 @@ async function authDepositor(account: SignerWithAddress | Wallet, auth: VaultAut
     console.log('Depositor Authorised');
 }
 
-/**
- * Get Auxo contract and associated Auth contract, connected as the admin
- */
-async function getAuxoContracts (account: SignerWithAddress | Wallet) {
-    console.log('Fetching Contracts');
-    const auxo = Auxo__factory.connect(CONTRACTS.VAULTS.FTM.AUXO_USDC, account);
-
-    const authAddr = await auxo.auth()   
-    let auth = VaultAuth__factory.connect(authAddr, account);  
-    
-    const adminAddress = await auth.admin();
-    const admin = await impersonate(adminAddress);
-    
-    auth = VaultAuth__factory.connect(CONTRACTS.VAULTS.FTM.AUTH, admin)
-    return {
-        auxo, auth
-    }
-}
-
-
 export async function depositIntoAuxo() {
-    console.log('Beginning deposit into Auxo');
+    console.log('Beginning deposit into Auxo - note this is currently configured for the FTM network');
 
     const account = await getAccountWithFallback(TEST_ACCOUNTS.FAKE_NEWS);
     await transferTokens(account);
